@@ -6,8 +6,6 @@ import app from './module/app'
 export default createStore({
   state: {
   },
-  getters: {
-  },
   mutations: {
   },
   actions: {

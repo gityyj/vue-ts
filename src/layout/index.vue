@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { mapGetters } from 'vuex'
+import { defineComponent, computed } from 'vue';
+import { mapGetters, useStore } from 'vuex'
 import SideMune from './components/SideMenu/index.vue'
 
 export default defineComponent({
@@ -26,17 +26,25 @@ export default defineComponent({
 	components: {
 		SideMune
 	},
+
   props: {
   },
+
+	setup () {
+    const store = useStore()
+		console.log(store.getters.menuList)
+    return {
+      menuList: computed(() => store.getters.menuList),
+    }
+  },
+
 	data() {
 		return {
 			isCollapsed: true,
 		} 
 	},
+
 	computed: {
-		...mapGetters([
-			'menuList'
-		]),
 		rotateIcon () : Array<String> {
 			return [
 				'menu-icon',

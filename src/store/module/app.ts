@@ -1,11 +1,10 @@
-import { createStore } from 'vuex'
 import { getMenuByRouter } from '@/libs/util'
 
 import router from '@/router'
 import routers from '@/router/routers'
 const homeName = 'home'
 
-export default createStore({
+export default {
   state: {
     breadCrumbList: [],
     tagNavList: [],
@@ -15,7 +14,7 @@ export default createStore({
     hasReadErrorPage: false
   },
   getters: {
-    menuList: (state, getters, rootState: any) => getMenuByRouter(routers, rootState.user.access) 
+    menuList: (state: any, getters: any, rootState: any) => getMenuByRouter(routers, [])
   },
   mutations: {
   },
@@ -23,4 +22,4 @@ export default createStore({
   },
   modules: {
   }
-})
+}

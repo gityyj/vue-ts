@@ -37,6 +37,10 @@ export default defineComponent({
       type: String,
       default: 'dark'
     },
+    accordion: {
+      type: Boolean,
+      default: true
+    },
   },
   data() {
     return {

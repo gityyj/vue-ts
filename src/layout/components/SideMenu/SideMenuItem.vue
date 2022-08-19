@@ -7,12 +7,16 @@
       <template v-if="item.children && item.children.length === 1">
         <SideMenuItem v-if="showChildren(item)" :key="'menu-' + item.name" ></SideMenuItem>
         <menu-item v-else :key="'menu-' + item.children[0].name" :name="getNameOrHref(item, true)">
-          <Icon type=""></Icon>
+          <Icon :type="item.icon"></Icon>
           <span>{{ showTitle(item.children[0]) }}</span>
         </menu-item>
       </template>
       <template v-else>
-        
+        <SideMenuItem v-if="showChildren(item)" :key="'menu-' + item.name" :parentItem="item" ></SideMenuItem>
+        <menu-item v-else :key="'menu-' + item.name" :name="getNameOrHref(item)">
+          <Icon :type="item.icon"></Icon>
+          <span>{{ showTitle(item) }}</span>
+        </menu-item>
       </template>
     </template>
   </Submenu>
