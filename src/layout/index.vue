@@ -1,0 +1,74 @@
+<template>
+  <Layout style="height: 100%" class="main">
+    <Sider ref="side1" hide-trigger collapsible :width="256" :collapsed-width="78" v-model="isCollapsed"  class="left-sider" >
+			<SideMune :menuList="menuList" :collapsed="isCollapsed" :active-name="$route.name"> 
+				
+			</SideMune>
+    </Sider>
+    <Layout>
+			<Header :style="{padding: 0}" class="header-con">
+				<Icon @click="collapsedSider" :class="rotateIcon" color="white" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
+			</Header>
+			<Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}"  class="main-content-con">
+					<router-view/>
+			</Content>
+    </Layout>
+</Layout>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { mapGetters } from 'vuex'
+import SideMune from './components/SideMenu/index.vue'
+
+export default defineComponent({
+  name: 'LayoutBar',
+	components: {
+		SideMune
+	},
+  props: {
+  },
+	data() {
+		return {
+			isCollapsed: true,
+		} 
+	},
+	computed: {
+		...mapGetters([
+			'menuList'
+		]),
+		rotateIcon () : Array<String> {
+			return [
+				'menu-icon',
+				this.isCollapsed ? 'rotate-icon' : ''
+			];
+		},
+		menuitemClasses () : Array<String> {
+			return [
+				'menu-item',
+				this.isCollapsed ? 'collapsed-menu' : ''
+			]
+		}
+	},
+	mounted() {
+		const side: any = this.$refs.side1
+		side.toggleCollapse();
+	},
+  methods: {
+    collapsedSider() {
+      (this.$refs.side1 as any).toggleCollapse();
+    }
+  }
+});
+</script>
+
+<style>
+@import './index.less';
+.menu-icon{
+	transition: all .3s;
+	cursor: pointer;
+}
+.rotate-icon{
+	transform: rotate(-90deg);
+}
+</style>
