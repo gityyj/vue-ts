@@ -10,9 +10,19 @@
     >
       <template v-for="item in menuList">
         <template v-if="item.children && item.children.length === 1">
-          
+          <SideMenuItem v-if="showChildren(item)" :key="'menu-' + item.name" :parentItem="item"></SideMenuItem>
+          <menu-item v-else :name="getNameOrHref(item, true)" :key="'menu-' + item.children[0].name">
+            <Icon :type="item.icon"></Icon>
+            <span>{{ showTitle(item.children[0]) }}</span>
+          </menu-item>
         </template>
-
+        <template v-else>
+          <SideMenuItem v-if="showChildren(item)" :key="'menu-' + item.name" :parentItem="item"></SideMenuItem>
+          <menu-item v-else :name="getNameOrHref(item)" :key="'menu-' + item.name">
+            <Icon :type="item.icon"></Icon>
+            <span>{{ showTitle(item) }}</span>
+          </menu-item>
+        </template>
       </template>
     </Menu>
   </div>
@@ -20,7 +30,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { showChildren } from './methods'
+import { showChildren, getNameOrHref } from './methods'
+import SideMenuItem from './SideMenuItem.vue'
+import { showTitle } from '@/libs/util'
+
 export default defineComponent({
   props: {
     collapsed: {
@@ -47,9 +60,15 @@ export default defineComponent({
       openedNames: []
     }
   },
+  components: {
+    SideMenuItem
+  },
   setup() {
-    
+    return { showChildren, getNameOrHref, showTitle }
   },
 })
 </script>
+<style lang="less" scoped>
+@import './side-menu.less';
+</style>
 

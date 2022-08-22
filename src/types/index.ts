@@ -9,13 +9,13 @@ export interface RouteMeta {
 }
 
 // Omit 生成一个新类型，该类型拥有 T 中除了 K 属性以外的所有属性
-export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
-  name: string;
-  path: string;
-  meta: RouteMeta;
-  component: Component | string;
-  children?: Array<AppRouteRecordRaw>;
-}
+// export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
+//   name: string;
+//   path: string;
+//   meta: RouteMeta;
+//   component: Component | string;
+//   children?: Array<AppRouteRecordRaw>;
+// }
 
 
-export type AppRouteModule = AppRouteRecordRaw
+// export type AppRouteModule = AppRouteRecordRaw

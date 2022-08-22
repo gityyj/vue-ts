@@ -1,8 +1,11 @@
 <template>
   <Layout style="height: 100%" class="main">
-    <Sider ref="side1" hide-trigger collapsible :width="256" :collapsed-width="78" v-model="isCollapsed"  class="left-sider" >
-			<SideMune :menuList="menuList" :collapsed="isCollapsed" :active-name="$route.name"> 
-				
+    <Sider ref="side1" hide-trigger collapsible :width="240" :collapsed-width="78" v-model="isCollapsed"  class="left-sider" >
+			<SideMune :menuList="menuList" :collapsed="isCollapsed" :active-name="$route.name" @on-select="turnToPage"> 
+				<div class="logo-con">
+          <img v-show="!collapsed" src="@/assets/images/logo.jpg" key="max-logo" />
+          <img v-show="collapsed" src="@/assets/images/logo-min.jpg" key="min-logo" />
+        </div>
 			</SideMune>
     </Sider>
     <Layout>
@@ -20,6 +23,7 @@
 import { defineComponent, computed } from 'vue';
 import { mapGetters, useStore } from 'vuex'
 import SideMune from './components/SideMenu/index.vue'
+import './index.less';
 
 export default defineComponent({
   name: 'LayoutBar',
@@ -65,12 +69,15 @@ export default defineComponent({
   methods: {
     collapsedSider() {
       (this.$refs.side1 as any).toggleCollapse();
-    }
+    },
+		turnToPage() {
+
+		},
   }
 });
 </script>
 
-<style>
+<style scoped>
 @import './index.less';
 .menu-icon{
 	transition: all .3s;

@@ -1,6 +1,6 @@
 import Main from '@/layout/index.vue'
 import { RouteRecordRaw } from 'vue-router'
-import { AppRouteRecordRaw } from '@/types'
+// import { AppRouteRecordRaw } from '@/types'
 
 /**
  * meta除了原生参数外可配置的参数:
@@ -18,7 +18,7 @@ import { AppRouteRecordRaw } from '@/types'
  * }
  */
 
-const routes: Array<AppRouteRecordRaw> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: '_home',
@@ -26,7 +26,8 @@ const routes: Array<AppRouteRecordRaw> = [
     component: () => import('@/layout/index.vue'),
     meta: {
       hideInMenu: true,
-      notCache: true
+      notCache: true,
+      title: 'home'
     },
     children: [
       {

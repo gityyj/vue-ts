@@ -35,10 +35,27 @@ export const getMenuByRouter = (list: Array<RouteRecordRaw>, access: Array<strin
       children: []
     }
     if(hasChild(item) || (item.meta && item.meta.showAlways) && showThisMenuEle(item, access)) {
-      obj.children = getMenuByRouter(item.children, access)
+      obj.children = getMenuByRouter(item.children as Array<RouteRecordRaw>, access)
     }
-
+    if(item.meta && item.meta.href) {
+      obj.href = item.meta.href
+    }
     res.push(obj)
   })
   return res
+}
+
+export interface RouteMeta {
+  title?: string;
+  hideInMenu?: boolean;
+  notCache?: boolean;
+}
+
+export const showTitle = (item: RouteRecordRaw, vm: any) => {
+  // let title = item.meta && item.meta.title
+  let { title } = item.meta as RouteMeta
+  if(!title) return
+  title =( (item.meta && item.meta.title) || item.name) as string
+  return title
+
 }
